@@ -1,3 +1,5 @@
+// UnDirected Graph
+
 // TC: O(E + V)
 // Sc: O(E + V)
 class Solution {
@@ -36,4 +38,45 @@ class Solution {
 // 5 -> 6
 // 6 -> 5
 // 7 -> 
+
+
+// Directed Graph Trversal from node 1 to A
+public class Solution {
+    public int[] visited;
+    ArrayList<ArrayList<Integer>> adj;
+    public int solve(int A, ArrayList<ArrayList<Integer>> B) {
+        // create a graph
+        adj = createDirectedGraph(A, B);
+
+        visited = new int[A + 1];
+
+        dfs(1);
+
+        return visited[A];
+    }
+    public void dfs(int cur) {
+        visited[cur] = 1;
+
+        // adj.get(idx) give the ArrayList if neighbour
+        // on which we are applying the loop
+        for (int neigh: adj.get(cur)) {
+            if (visited[neigh] == 0) {
+                dfs(neigh);
+            }
+        }
+    }
+    public ArrayList<ArrayList<Integer>> createDirectedGraph(int A, ArrayList<ArrayList<Integer>> edges) {
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+
+        for (int i = 0; i <= A; i++) {
+            adj.add(new ArrayList<Integer>());
+        }
+
+        for (ArrayList<Integer> curEdge: edges) {
+            adj.get(curEdge.get(0)).add(curEdge.get(1));
+        }
+
+        return adj;
+    } 
+}
 
