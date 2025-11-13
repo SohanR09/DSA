@@ -11,9 +11,7 @@ class Solution {
 
         for (int i = 0; i < n; i++) {
             minStock = Math.min(minStock, prices[i]);
-            if (prices[i] > minStock) {
-                maxProfit = Math.max(maxProfit, prices[i] - minStock);
-            }
+            maxProfit = Math.max(maxProfit, prices[i] - minStock);
         }
 
         return maxProfit;
